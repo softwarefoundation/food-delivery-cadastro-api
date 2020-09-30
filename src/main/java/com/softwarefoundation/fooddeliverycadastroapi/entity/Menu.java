@@ -28,7 +28,15 @@ public class Menu {
     @Column(name = "PRECO")
     private Double preco;
 
+    @Transient
+    private Restaurante restaurante;
+
     public static Menu from(MenuDto dto){
-        return new ModelMapper().map(dto, Menu.class);
+
+        Menu menu = new ModelMapper().map(dto, Menu.class);
+        Restaurante restaurante = new Restaurante();
+        restaurante.setId(dto.getRestauranteId());
+        menu.setRestaurante(restaurante);
+        return menu;
     }
 }

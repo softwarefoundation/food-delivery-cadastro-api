@@ -12,5 +12,6 @@ public class MenuDto {
     private Long id;
     private String nome;
     private Double preco;
+    private Long restauranteId;
 
 }

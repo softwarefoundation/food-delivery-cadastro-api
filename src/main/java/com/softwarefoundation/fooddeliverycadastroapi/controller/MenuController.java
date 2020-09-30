@@ -14,7 +14,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(name = "/api")
+@RequestMapping(path = "/api")
 @Slf4j
 public class MenuController implements Serializable{
     @Autowired
@@ -37,7 +37,8 @@ public class MenuController implements Serializable{
     public ResponseEntity cadastrar(@RequestBody MenuDto menuDto) {
         try {
             log.info(menuDto.toString());
-            return ResponseEntity.ok(menuService.salvar(Menu.from(menuDto)));
+            Menu menu = Menu.from(menuDto);
+            return ResponseEntity.ok(menuService.salvar(menu));
         } catch (Exception e) {
             return ResponseEntity.badRequest().build();
         }
