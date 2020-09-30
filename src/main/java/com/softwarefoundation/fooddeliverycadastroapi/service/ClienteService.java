@@ -1,6 +1,7 @@
 package com.softwarefoundation.fooddeliverycadastroapi.service;
 
 import com.softwarefoundation.fooddeliverycadastroapi.dto.ClienteDto;
+import com.softwarefoundation.fooddeliverycadastroapi.dto.ClientePedidoDto;
 import com.softwarefoundation.fooddeliverycadastroapi.dto.PedidoDto;
 import com.softwarefoundation.fooddeliverycadastroapi.entity.Cliente;
 import com.softwarefoundation.fooddeliverycadastroapi.mensagens.ClientSendMessage;
@@ -27,7 +28,7 @@ public class ClienteService {
 
     public Cliente salvar(Cliente cliente) {
         Cliente cl = clienteRepository.save(cliente);
-        clientSendMessage.sendMessage(PedidoDto.from(cl));
+        clientSendMessage.sendMessage(ClientePedidoDto.from(cl));
         return cl;
     }
 

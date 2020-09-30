@@ -28,10 +28,14 @@ public class RabbitmqConfig {
     @Bean
     public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
         final RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
-        rabbitTemplate.setMessageConverter(new Jackson2JsonMessageConverter());
+        rabbitTemplate.setMessageConverter(messageConverter());
         return rabbitTemplate;
     }
 
+    @Bean
+    public MessageConverter messageConverter() {
+        return new Jackson2JsonMessageConverter();
+    }
     //------------------------------------------------------------
 
 //
