@@ -1,6 +1,9 @@
 package com.softwarefoundation.fooddeliverycadastroapi.service;
 
+import com.softwarefoundation.fooddeliverycadastroapi.dto.ClienteDto;
+import com.softwarefoundation.fooddeliverycadastroapi.dto.PedidoDto;
 import com.softwarefoundation.fooddeliverycadastroapi.entity.Cliente;
+import com.softwarefoundation.fooddeliverycadastroapi.mensagens.ClientSendMessage;
 import com.softwarefoundation.fooddeliverycadastroapi.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +16,9 @@ public class ClienteService {
     @Autowired
     private ClienteRepository clienteRepository;
 
+    @Autowired
+    private ClientSendMessage clientSendMessage;
+
 
     public Cliente pesquisarPorId(final Long id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
@@ -20,7 +26,9 @@ public class ClienteService {
     }
 
     public Cliente salvar(Cliente cliente) {
-        return clienteRepository.save(cliente);
+        Cliente cl = clienteRepository.save(cliente);
+        clientSendMessage.sendMessage(PedidoDto.from(cl));
+        return cl;
     }
 
     public Cliente atualizar(Cliente cliente) {
