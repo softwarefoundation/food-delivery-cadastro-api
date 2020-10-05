@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Objects;
 
 @RestController
-@RequestMapping(path = "/api")
+@RequestMapping()
 @Slf4j
 public class ClienteController {
 
